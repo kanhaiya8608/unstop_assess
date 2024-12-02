@@ -1,0 +1,59 @@
+<div class="p-8 bg-gray-100">
+  <h1 class="text-4xl font-bold text-center text-gray-800 mb-4">
+    Train Seat Reservation System
+  </h1>
+
+  <!-- Input Form -->
+  <form
+    (ngSubmit)="reserveSeats()"
+    class="flex flex-col items-center gap-4 p-8 w-full max-w-md mx-auto"
+  >
+    <label for="seatCount" class="text-xl font-semibold text-gray-700 mb-4">
+      Enter number of seats to reserve:
+    </label>
+    <input
+      type="number"
+      id="seatCount"
+      [(ngModel)]="requiredSeats"
+      name="seatCount"
+      required
+      min="1"
+      max="7"
+      class="p-4 border-2 border-gray-300 rounded-xl w-36 text-center focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 mb-6"
+      placeholder="Seats"
+    />
+    <div class="flex space-x-4">
+      <button
+        type="submit"
+        class="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition duration-300"
+      >
+        Reserve Seats
+      </button>
+      <button
+        (click)="resetSeats()"
+        type="button"
+        class="bg-red-500 text-white py-2 px-4 rounded-xl hover:bg-red-600 transition duration-300"
+      >
+        Reset Seats
+      </button>
+    </div>
+  </form>
+
+  <!-- Seat Layout -->
+  <div class="seat-layout grid grid-cols-7 gap-6 mb-6">
+    <div
+      *ngFor="let row of seats; let rowIndex = index"
+      class="flex justify-center space-x-4"
+    >
+      <div
+        *ngFor="let seat of row; let seatIndex = index"
+        [class.bg-green-600]="seat"
+        [class.bg-gray-300]="!seat"
+        class="w-14 h-14 flex items-center justify-center text-white font-semibold cursor-pointer rounded-full transition-all duration-300 ease-in-out transform hover:scale-110 hover:shadow-lg"
+        [title]="'Seat ' + (rowIndex * 7 + seatIndex + 1)"
+      >
+        {{ rowIndex * 7 + seatIndex + 1 }}
+      </div>
+    </div>
+  </div>
+</div>
